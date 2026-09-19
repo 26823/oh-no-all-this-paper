@@ -5,6 +5,8 @@ window.addEventListener('load', function(){
     canvas.height = 600;
 
     let gamepadIndex = null;
+    let aButtonLocked = false; // Houdt bij of de knop al ingedrukt was
+
 
 
     class Player {
@@ -64,16 +66,20 @@ window.addEventListener('load', function(){
 
     const player = new Player(canvas.width, canvas.height);
 
-    function animate(){
-
+        function animate(){
          if (gamepadIndex !== null) {
               const gamepads = navigator.getGamepads();
               const gp = gamepads[gamepadIndex];
      
+              // Alleen springen als A is ingedrukt, de knop NIET vergrendeld is, EN de speler op de grond staat (vy === 0)
               if (gp && gp.buttons[0].pressed) {
-                   // Dit voert direct uit zolang je A ingedrukt houdt
-                   player.frameY += 1;
-                   player.vy = -8;
+                   if (!aButtonLocked && player.vy === 0) {
+                        player.frameY += 1;
+                        player.vy = -8;
+                        aButtonLocked = true; // Vergrendel de knop direct
+                   }
+              } else {
+                   aButtonLocked = false; // Ontgrendel pas als je de knop fysiek loslaat
               }
          }
 
@@ -82,6 +88,7 @@ window.addEventListener('load', function(){
          player.update();
          requestAnimationFrame(animate);
     }
+
     animate();
 
     addEventListener('keydown', function(e){
