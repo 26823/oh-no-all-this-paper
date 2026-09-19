@@ -21,7 +21,7 @@ window.addEventListener('load', function(){
               this.height = this.spriteHeight;
               this.scale = 2;
               this.x = this.canvasWidth/13 - this.width/2;
-              this.y = this.canvasHeight/13 - this.height/2;
+              this.y = this.canvasHeight/2 - this.height/2;
               this.minFrame = 0;
               this.maxFrame = 8;
               this.frameX = 0;
@@ -52,12 +52,12 @@ window.addEventListener('load', function(){
               this.vy += 0.30;
               this.y += this.vy
 
-              if (this.y >= canvas.height - 145){
-                   this.y = canvas.height - 145;
+              if (this.y >= canvas.height - 170){
+                   this.y = canvas.height - 170;
               }
-              if(this.y >= canvas.height - 145){
+              if(this.y >= canvas.height - 170){
 
-                   this.y = canvas.height - 145;
+                   this.y = canvas.height - 170;
                    this.vy = 0;
                    this.onGround = true; // <-- STAP 2: Speler raakt de grond weer
 
