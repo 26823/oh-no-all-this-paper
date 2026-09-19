@@ -6,6 +6,7 @@ window.addEventListener('load', function(){
 
     let gamepadIndex = null;
     let aButtonLocked = false; // Houdt bij of de knop al ingedrukt was
+    
 
 
 
@@ -30,6 +31,7 @@ window.addEventListener('load', function(){
               this.frameInterval = 4;
 
               this.vy = 0;
+              this.onGround = true; // <-- STAP 1: Volg de status van de speler
 
          }
          draw(context){
@@ -57,6 +59,7 @@ window.addEventListener('load', function(){
 
                    this.y = canvas.height - 145;
                    this.vy = 0;
+                   this.onGround = true; // <-- STAP 2: Speler raakt de grond weer
 
                    // terug naar idle animation
                    this.frameY = 0;
@@ -73,9 +76,10 @@ window.addEventListener('load', function(){
      
               // Alleen springen als A is ingedrukt, de knop NIET vergrendeld is, EN de speler op de grond staat (vy === 0)
               if (gp && gp.buttons[0].pressed) {
-                   if (!aButtonLocked && player.vy === 0) {
+                   if (!aButtonLocked && player.onGround) {
                         player.frameY += 1;
                         player.vy = -8;
+                        player.onGround = false; // Speler gaat de lucht in
                         aButtonLocked = true; // Vergrendel de knop direct
                    }
               } else {
@@ -92,7 +96,7 @@ window.addEventListener('load', function(){
     animate();
 
     addEventListener('keydown', function(e){
-         if (e.code === 'Space'){
+         if (e.code === 'Space' && player.onGround){
               player.frameY += 1;
               player.vy = -8;
          }
