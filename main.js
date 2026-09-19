@@ -110,6 +110,13 @@ window.addEventListener('load', function(){
               player.vy = -8;
          }
     });
+
+    addEventListener('keydown', function(e){
+         if (e.code === 'Enter'){
+              player.frameY += 2;
+         }
+    });
+    
     window.addEventListener("gamepadconnected", function(e) {
          gamepadIndex = e.gamepad.index;
     });
