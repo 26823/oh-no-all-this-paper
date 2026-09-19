@@ -6,7 +6,10 @@
 }
 
 #canvas1 {
-    background: blue;
+    background-image: url('assets/BG.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 #player {
