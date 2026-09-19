@@ -30,6 +30,8 @@ window.addEventListener('load', function(){
 
               this.frameTimer = 0;
               this.frameInterval = 4;
+              this.attacking = false;
+              this.attackTimer = 0;
 
               this.vy = 0;
               this.onGround = true; // <-- STAP 1: Volg de status van de speler
@@ -65,6 +67,20 @@ window.addEventListener('load', function(){
                    // terug naar idle animation
                    this.frameY = 0;
               } 
+              if (this.attacking) {
+              this.attackTimer++;
+
+                    if (this.attackTimer >= 10) {
+                          this.attackTimer = 0;
+                          this.frameX++;
+
+                          if (this.frameX >= 8) {
+                               this.frameX = 0;
+                               this.frameY = 0;
+                               this.attacking = false;
+                          }
+                      }
+                }
          }
     }
 
@@ -115,8 +131,9 @@ window.addEventListener('load', function(){
 
     addEventListener('keydown', function(e){
          if (e.code === 'Enter'){
-              player.frameY += 2;
-              player.frameX += 5;
+              player.attacking = true;
+              player.attackTimer = 0;
+              player.frameY = 2;
          }
     });
     
