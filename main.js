@@ -6,6 +6,7 @@ window.addEventListener('load', function(){
 
     let gamepadIndex = null;
     let aButtonLocked = false; // Houdt bij of de knop al ingedrukt was
+    let xButtonLocked = false; // Houdt bij of de knop al ingedrukt was
     
 
 
@@ -84,6 +85,14 @@ window.addEventListener('load', function(){
                    }
               } else {
                    aButtonLocked = false; // Ontgrendel pas als je de knop fysiek loslaat
+              }
+             
+              if (gp && (gp.buttons[2].pressed || gp.buttons[7].pressed)) {
+                   if (!xButtonLocked) {
+                        xButtonLocked = true; // Vergrendel de knop direct
+                   }
+              } else {
+                   xButtonLocked = false; // Ontgrendel pas als je de knop fysiek loslaat
               }
          }
 
