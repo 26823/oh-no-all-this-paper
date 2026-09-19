@@ -89,6 +89,8 @@ window.addEventListener('load', function(){
              
               if (gp && (gp.buttons[2].pressed || gp.buttons[7].pressed)) {
                    if (!xButtonLocked) {
+                        player.frameY += 1;
+                        player.frameX += 5;
                         xButtonLocked = true; // Vergrendel de knop direct
                    }
               } else {
@@ -114,6 +116,7 @@ window.addEventListener('load', function(){
     addEventListener('keydown', function(e){
          if (e.code === 'Enter'){
               player.frameY += 2;
+              player.frameX += 5;
          }
     });
     
