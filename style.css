@@ -6,7 +6,7 @@
 }
 
 #canvas1 {
-    background-image: url('assets/BG.png');
+    background-image: url('BG.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
