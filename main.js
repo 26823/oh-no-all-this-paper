@@ -42,6 +42,28 @@ window.addEventListener('load', function(){
          }
          update(){
 
+                 // =========================
+                // AANVAL
+               // =========================
+                if (this.attacking) {
+
+                this.attackTimer++;
+
+                if (this.attackTimer >= 8) {
+                    this.attackTimer = 0;
+                    this.frameX++;
+
+            // Aanval klaar
+                    if (this.frameX >= 5) {
+                        this.frameX = 0;
+                        this.frameY = 0;
+                        this.attacking = false;
+                    }
+                }
+
+                return; // normale animatie hieronder NIET uitvoeren
+                }
+
               this.frameTimer++;
 
               // Pas na 10 frames naar het volgende sprite-frame
@@ -67,20 +89,6 @@ window.addEventListener('load', function(){
                    // terug naar idle animation
                    this.frameY = 0;
               } 
-              if (this.attacking) {
-              this.attackTimer++;
-
-                    if (this.attackTimer >= 1000) {
-                          this.attackTimer = 0;
-                          this.frameX++;
-
-                          if (this.frameX >= 8) {
-                               this.frameX = 0;
-                               this.frameY = 0;
-                               this.attacking = false;
-                          }
-                      }
-                }
          }
     }
 
@@ -103,10 +111,11 @@ window.addEventListener('load', function(){
                    aButtonLocked = false; // Ontgrendel pas als je de knop fysiek loslaat
               }
              
-              if (gp && (gp.buttons[2].pressed || gp.buttons[7].pressed)) {
+              if (gp && (gp.buttons[2].pressed || gp.buttons[7].pressed) && !player.attacking) {
                    if (!xButtonLocked) {
-                        player.frameY += 1;
-                        player.frameX += 5;
+                        player.frameY = 2;
+                        player.frameX = 0;
+                        player.attacking = true;
                         xButtonLocked = true; // Vergrendel de knop direct
                    }
               } else {
@@ -130,9 +139,10 @@ window.addEventListener('load', function(){
     });
 
     addEventListener('keydown', function(e){
-         if (e.code === 'Enter'){
+         if (e.code === 'Enter' && !player.attacking){
               player.attacking = true;
               player.attackTimer = 0;
+              player.frameX = 0;
               player.frameY = 2;
          }
     });
