@@ -54,7 +54,7 @@ window.addEventListener('load', function(){
                     this.frameX++;
 
             // Aanval klaar
-                    if (this.frameX >= 6) {
+                    if (this.frameX >= 5) {
                         this.frameX = this.minFrame;
                         this.frameY = this.minFrame;
                         this.attacking = false;
