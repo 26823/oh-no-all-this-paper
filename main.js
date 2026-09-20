@@ -70,7 +70,7 @@ window.addEventListener('load', function(){
               if (this.attacking) {
               this.attackTimer++;
 
-                    if (this.attackTimer >= 10) {
+                    if (this.attackTimer >= 1000) {
                           this.attackTimer = 0;
                           this.frameX++;
 
