@@ -49,7 +49,7 @@ window.addEventListener('load', function(){
 
                 this.attackTimer++;
 
-                if (this.attackTimer >= 8) {
+                if (this.attackTimer >= 15) {
                     this.attackTimer = 0;
                     this.frameX++;
 
