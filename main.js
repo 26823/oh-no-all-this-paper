@@ -178,6 +178,9 @@ blocks = blocks.filter(block => block.x > -100);
                 }
 
                 blocks = blocks.filter(block => block.x > -100);
+                for (let block of blocks) {
+                    block.draw(ctx);
+                }
          }
 
          ctx.clearRect(0, 0, canvas.width, canvas.height);
