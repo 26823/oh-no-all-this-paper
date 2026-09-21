@@ -13,7 +13,7 @@ window.addEventListener('load', function(){
     class Block {
     constructor(canvasWidth, canvasHeight) {
         this.x = canvasWidth;
-        this.y = canvasHeight - 100;
+        this.y = 430;
         this.width = 50;
         this.height = 50;
         this.speed = 5;
