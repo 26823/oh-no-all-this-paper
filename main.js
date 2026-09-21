@@ -4,12 +4,56 @@ window.addEventListener('load', function(){
     canvas.width = 1300;
     canvas.height = 600;
 
+    
+
     let gamepadIndex = null;
     let aButtonLocked = false; // Houdt bij of de knop al ingedrukt was
     let xButtonLocked = false; // Houdt bij of de knop al ingedrukt was
     
+    class Block {
+    constructor(canvasWidth, canvasHeight) {
+        this.x = canvasWidth;
+        this.y = canvasHeight - 100;
+        this.width = 50;
+        this.height = 50;
+        this.speed = 5;
+    }
 
+    update() {
+        this.x -= this.speed;
+    }
 
+    draw(ctx) {
+        ctx.fillStyle = "brown";
+        ctx.fillRect(
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        );
+    }
+}
+
+let blocks = [];
+let blockTimer = 60;
+
+function spawnBlock() {
+    blocks.push(new Block(canvas.width, canvas.height));
+}
+
+blockTimer--;
+
+if (blockTimer <= 0) {
+    spawnBlock();
+
+    blockTimer = 60 + Math.random() * 120;
+}
+
+for (let block of blocks) {
+    block.update();
+}
+
+blocks = blocks.filter(block => block.x > -100);
 
     class Player {
          constructor(canvasWidth, canvasHeight){
@@ -121,6 +165,19 @@ window.addEventListener('load', function(){
               } else {
                    xButtonLocked = false; // Ontgrendel pas als je de knop fysiek loslaat
               }
+
+               blockTimer--;
+
+                if (blockTimer <= 0) {
+                    spawnBlock();
+                    blockTimer = 60 + Math.random() * 120;
+                }
+
+                for (let block of blocks) {
+                    block.update();
+                }
+
+                blocks = blocks.filter(block => block.x > -100);
          }
 
          ctx.clearRect(0, 0, canvas.width, canvas.height);
